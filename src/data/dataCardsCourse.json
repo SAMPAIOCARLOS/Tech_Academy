@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "category": "Programação Web",
+        "DataCards": [
+            {
+                "id_data": 1,
+                "path_imgCourse": "img_courseHTML.png",
+                "titleCourse": "HTML E CSS ",
+                "descriptionCourse": "Aprenda a estruturar e estilizar páginas web.",
+                "textButton": "Saiba mais",
+                "timeCourse": "30h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 2,
+                "path_imgCourse": "img_courseHTML.png",
+                "titleCourse": "JavaScript",
+                "descriptionCourse": "Curso de linguagem JavaScript, voltado para iniciantes.",
+                "textButton": "Saiba mais",
+                "timeCourse": "40h",
+                "category": "Programação Web"
+            }
+        ]
+    }
+]

@@ -3,12 +3,24 @@ import { getImageUrl_image } from '../../utils/imageHelper';
 
 import Navigation from './Navigation.vue';
 
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+function RouterHome(): void {
+    router.push('/')
+
+    setTimeout((): void => {
+        window.location.reload();
+    }, 100)
+}
+
+
 </script>
 
 <template>
     <nav>
         <div id="conatinerContentNavBar">
-            <div id="containerLogo">
+            <div id="containerLogo" @click="RouterHome">
                 <img :src="getImageUrl_image('logo_aplication.png')" alt="">
             </div>
 
@@ -28,6 +40,7 @@ nav {
     justify-content: center;
     position: fixed;
     background-color: #ffffff;
+    z-index: 100;
 }
 
 #conatinerContentNavBar {

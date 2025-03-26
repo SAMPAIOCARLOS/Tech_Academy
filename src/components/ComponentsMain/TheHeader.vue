@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import NavBar from '../ComponentsHeader/NavBar.vue';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+function RouterCourse(): void {
+    router.push('/Course')
+}
 
 </script>
 
@@ -11,7 +16,7 @@ import NavBar from '../ComponentsHeader/NavBar.vue';
         <h1 id="titleHeader">Aprenda Tecnologia com os Melhores</h1>
         <p id="subtitleHeader">Cursos práticos e didáticos para acelerar sua carreira na tecnologia.</p>
 
-        <button id="buttonHeader">Nossos Cursos</button>
+        <button id="buttonHeader" @click="RouterCourse">Nossos Cursos</button>
     </header>
 </template>
 
