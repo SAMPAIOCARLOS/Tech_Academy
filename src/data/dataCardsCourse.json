@@ -14,11 +14,86 @@
             },
             {
                 "id_data": 2,
-                "path_imgCourse": "img_courseHTML.png",
+                "path_imgCourse": "img_courseJS.png",
                 "titleCourse": "JavaScript",
                 "descriptionCourse": "Curso de linguagem JavaScript, voltado para iniciantes.",
                 "textButton": "Saiba mais",
                 "timeCourse": "40h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 3,
+                "path_imgCourse": "img_courseREACT.png",
+                "titleCourse": "JavaScript",
+                "descriptionCourse": "Criação de aplicações web modernas e performáticas.",
+                "textButton": "Saiba mais",
+                "timeCourse": "60h",
+                "category": "Programação Web"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category": "Ciência de Dados ",
+        "DataCards": [
+            {
+                "id_data": 1,
+                "path_imgCourse": "img_course_Python.png",
+                "titleCourse": "Python",
+                "descriptionCourse": "Python e suas principais bibliotecas para análise e manipulação de dados",
+                "textButton": "Saiba mais",
+                "timeCourse": "40h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 2,
+                "path_imgCourse": "img_course_Machine_Learning.png",
+                "titleCourse": "Machine Learning",
+                "descriptionCourse": "Introdução aos principais conceitos e algoritmos de aprendizado de máquina.",
+                "textButton": "Saiba mais",
+                "timeCourse": "50h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 3,
+                "path_imgCourse": "img_course_Power_BI.png",
+                "titleCourse": "Power BI",
+                "descriptionCourse": "Criação de painéis interativos e análise de dados com Power BI.",
+                "textButton": "Saiba mais",
+                "timeCourse": "30h",
+                "category": "Programação Web"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category": "Desenvolvimento de Jogos",
+        "DataCards": [
+            {
+                "id_data": 1,
+                "path_imgCourse": "img_course_Game_Design.png",
+                "titleCourse": "Game Design",
+                "descriptionCourse": "Aprenda a criar e testar mecânicas de jogos.",
+                "textButton": "Saiba mais",
+                "timeCourse": "80h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 2,
+                "path_imgCourse": "img_course_Unity.png",
+                "titleCourse": "Unity",
+                "descriptionCourse": "Crie jogos 2D e 3D com Unity e C#.",
+                "textButton": "Saiba mais",
+                "timeCourse": "60h",
+                "category": "Programação Web"
+            },
+            {
+                "id_data": 3,
+                "path_imgCourse": "img_course_Godot_Engine.png",
+                "titleCourse": "Godot Engine",
+                "descriptionCourse": "Desenvolva jogos com a engine Godot.",
+                "textButton": "Saiba mais",
+                "timeCourse": "50h",
                 "category": "Programação Web"
             }
         ]

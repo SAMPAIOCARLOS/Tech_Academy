@@ -30,6 +30,7 @@ import CourseCards from './CourseCards.vue';
     /* justify-content: center; */
     align-items: center;
     gap: 3rem;
+    background-color: #F3F4F6;
 }
 
 #containerFilterCards {
