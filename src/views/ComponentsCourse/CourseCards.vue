@@ -3,13 +3,15 @@ import { ref, onMounted } from 'vue';
 import { getImageUrl_image } from '../../utils/imageHelper';
 import * as interfaces from '../../interfaces/interface'
 import { GetDataCardsCourses } from '../../Services/requests';
+import { useRouter } from 'vue-router'
 
 
-const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
 
 onMounted((): void => {
     recoverDataCourse();
 })
+
+const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
 
 async function recoverDataCourse(): Promise<void> {
     const endpoint = "src/data/dataCardsCourse.json";
@@ -18,6 +20,25 @@ async function recoverDataCourse(): Promise<void> {
     DataCreateCourse.value = sucess;
 }
 
+
+
+
+
+
+const router = useRouter()
+function RouterDedicated(item: any): void {
+    router.push({
+        path: "/DedicatedCourse",
+        query: {
+            id: item.id_data,
+            title: item.titleCourse,
+            description: item.descriptionCourse,
+            image: item.path_imgCourse,
+            time: item.timeCourse,
+            textButton: item.textButton
+        }
+    });
+}
 
 </script>
 
@@ -34,20 +55,22 @@ async function recoverDataCourse(): Promise<void> {
                 <div class="containerImgCourse">
                     <img :src="getImageUrl_image(item.path_imgCourse)" :alt="item.titleCourse">
                 </div>
-                <h1>{{ item.titleCourse }}</h1>
+                <h1 class="title_course">{{ item.titleCourse }}</h1>
                 <p class="description_course">{{ item.descriptionCourse }}</p>
-                <button class="button_course">{{ item.textButton }}</button>
+
+                <button class="button_course" @click="RouterDedicated(item)">{{ item.textButton }}</button>
 
             </div>
         </div>
 
     </div>
+    
 </template>
 
 <style scoped>
 .container_category_course {
     width: 100%;
-    border: 5px solid red;
+    /* border: 5px solid red; */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -62,12 +85,13 @@ async function recoverDataCourse(): Promise<void> {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
-    border: 2px solid rgb(72, 255, 0);
+    /* border: 2px solid rgb(72, 255, 0); */
     flex-wrap: wrap;
 }
 
 .CardsCourse {
-    width: 25%;
+    width: 30%;
+    height: 60vh;
     border: 1px solid rgba(94, 94, 94, 0.541);
     border-top-right-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -76,6 +100,7 @@ async function recoverDataCourse(): Promise<void> {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     padding: 1.5rem 0;
     /* gap: 2rem; */
 }
@@ -106,10 +131,14 @@ async function recoverDataCourse(): Promise<void> {
     text-align: center;
 }
 
+.title_course {
+    font-size: 2.5rem;
+}
+
 .description_course {
     width: 80%;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     /* padding-top: 2rem; */
     padding: 1.5rem 0;
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderCourse from './HeaderCourse.vue';
 import ContentMainCourse from './ContentMainCourse.vue';
+import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
 
 </script>
 
@@ -9,7 +10,9 @@ import ContentMainCourse from './ContentMainCourse.vue';
     <HeaderCourse />
 
     <ContentMainCourse />
-    
+
+    <TheFooter />
+
 </template>
 
 <style scoped>

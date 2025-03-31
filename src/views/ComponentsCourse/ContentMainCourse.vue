@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import CourseCards from './CourseCards.vue';
 
+
+//FALTA  A FUNÇÃO DO FILTRO (OS DADOS DO JSON DEVE SER RECUPERADOS AQUI E PASSO POR PROPS PARA O COMPONENTE CourseCards.vue)
 </script>
 
 <template>
@@ -22,7 +24,7 @@ import CourseCards from './CourseCards.vue';
 
 <style scoped>
 #ContainerCourse {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     width: 100vw;
     min-height: 100vh;
     display: flex;
@@ -43,7 +45,7 @@ import CourseCards from './CourseCards.vue';
 
 #SelectFilter {
     padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.459);
+    /* border: 1px solid rgba(0, 0, 0, 0.459); */
     border-radius: 5px;
     font-size: 1.5rem;
     color: rgba(0, 0, 0, 0.459);
@@ -52,10 +54,11 @@ import CourseCards from './CourseCards.vue';
 #containerCards {
     width: 85%;
     min-height: 50vh;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     display: flex;
     justify-content: space-between;
     gap: 3rem;
     flex-wrap: wrap;
+    padding-bottom: 7rem;
 }
 </style>

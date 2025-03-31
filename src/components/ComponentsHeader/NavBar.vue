@@ -40,7 +40,7 @@ nav {
     justify-content: center;
     position: fixed;
     background-color: #ffffff;
-    z-index: 100;
+    z-index: 200;
 }
 
 #conatinerContentNavBar {

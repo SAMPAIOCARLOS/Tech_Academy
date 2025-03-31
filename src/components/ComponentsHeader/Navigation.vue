@@ -1,6 +1,33 @@
 <script setup lang="ts">
 import { getImageUrl_icon } from '../../utils/imageHelper';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
+
+function RouterNavigation(event: Event): void {
+    const target = event.target as HTMLLIElement;
+
+    console.log(target.innerText);
+
+    switch (target.innerText) {
+        case 'Home':
+            router.push('/');
+            break;
+        case 'Cursos':
+            router.push('/Course');
+            break;
+        case 'Blog':
+            router.push('/Blog');
+            break;
+        case 'Sobre nós':
+            router.push('/AboutUs');
+            break;
+        default:
+            break;
+    }
+
+}
 
 </script>
 
@@ -13,10 +40,10 @@ import { getImageUrl_icon } from '../../utils/imageHelper';
     </div>
 
     <ul id="containerListNavigation">
-        <li>Home</li>
-        <li>Cursos</li>
-        <li>Blog</li>
-        <li>Sobre nós</li>
+        <li @click="RouterNavigation">Home</li>
+        <li @click="RouterNavigation">Cursos</li>
+        <li @click="RouterNavigation">Blog</li>
+        <li @click="RouterNavigation">Sobre nós</li>
     </ul>
 
     <button id="buttonLogin">Login</button>
