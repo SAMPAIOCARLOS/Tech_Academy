@@ -1,23 +1,53 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import CourseCards from './CourseCards.vue';
+import { GetDataCardsCourses } from '../../Services/requests';
+import * as interfaces from '../../interfaces/interface';
 
+const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
+const allCourses = ref<interfaces.CardCourse[]>([]); // Guarda os dados originais
 
-//FALTA  A FUNÇÃO DO FILTRO (OS DADOS DO JSON DEVE SER RECUPERADOS AQUI E PASSO POR PROPS PARA O COMPONENTE CourseCards.vue)
+onMounted(async (): Promise<void> => {
+    await recoverDataCourse();
+});
+
+async function recoverDataCourse(): Promise<void> {
+    const endpoint = "src/data/dataCardsCourse.json";
+    const success = await GetDataCardsCourses(endpoint);
+
+    if (success) {
+        DataCreateCourse.value = success;
+        allCourses.value = success; // Salva uma cópia original dos dados
+    }
+}
+
+function teste(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+
+    if (selectedValue === "Todos") {
+        DataCreateCourse.value = allCourses.value;
+    } else {
+        DataCreateCourse.value = allCourses.value.filter((item) => item.category === selectedValue);
+    }
+}
 </script>
+
 
 <template>
     <div id="ContainerCourse">
         <div id="containerFilterCards">
-            <select name="SelectFilter" id="SelectFilter">
-                <option selected disabled>Todos</option>
-                <option value="Programacao_web">Programação web</option>
-                <option value="Ciencia_de_Dados">Ciência de Dados</option>
-                <option value="Desenvolvimento_de_Jogos">Desenvolvimento de Jogos</option>
+            <select name="SelectFilter" id="SelectFilter" @change="teste">
+                <option selected disabled>Selecione uma categoria</option>
+                <option value="Todos">Todos</option>
+                <option value="Programação Web">Programação web</option>
+                <option value="Ciência de Dados">Ciência de Dados</option>
+                <option value="Desenvolvimento de Jogos">Desenvolvimento de Jogos</option>
             </select>
         </div>
 
         <div id="containerCards">
-            <CourseCards />
+            <CourseCards :DataCreateCourse="DataCreateCourse" />
         </div>
     </div>
 </template>

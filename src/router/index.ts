@@ -8,9 +8,9 @@ import AboutUs from '../views/ComponentsAboutUs/AboutUs.vue';
 import DedicatedCourse from '../views/PageDedicatedCourse/DedicatedCourse.vue';
 
 // Simulação de autenticação
-function isAuthenticated(): boolean {
-  return !!localStorage.getItem("token"); // Retorna true se houver um token salvo
-}
+// function isAuthenticated(): boolean {
+//   return !!localStorage.getItem("token"); // Retorna true se houver um token salvo
+// }
 
 const routes: Route[] = [
   { path: "/", component: Home },
@@ -27,12 +27,12 @@ const router = createRouter({
 });
 
 // Proteção de rotas
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !isAuthenticated()) {
-    next("/login"); // Redireciona para login se não estiver autenticado
-  } else {
-    next(); // Continua normalmente
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth && !isAuthenticated()) {
+//     next("/login"); // Redireciona para login se não estiver autenticado
+//   } else {
+//     next(); // Continua normalmente
+//   }
+// });
 
 export default router;

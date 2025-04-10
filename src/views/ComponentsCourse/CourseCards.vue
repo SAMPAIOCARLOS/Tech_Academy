@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineProps } from 'vue';
 import { getImageUrl_image } from '../../utils/imageHelper';
 import * as interfaces from '../../interfaces/interface'
 import { GetDataCardsCourses } from '../../Services/requests';
@@ -7,23 +7,26 @@ import { useRouter } from 'vue-router'
 
 
 
-onMounted((): void => {
-    recoverDataCourse();
+const props = defineProps({
+    DataCreateCourse: {
+        type: Array as () => interfaces.CardCourse[],
+        required: true
+    }
 })
 
-const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
 
-async function recoverDataCourse(): Promise<void> {
-    const endpoint = "src/data/dataCardsCourse.json";
-    const sucess = await GetDataCardsCourses(endpoint);
+// onMounted((): void => {
+//     recoverDataCourse();
+// })
 
-    DataCreateCourse.value = sucess;
-}
+// const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
 
+// async function recoverDataCourse(): Promise<void> {
+//     const endpoint = "src/data/dataCardsCourse.json";
+//     const sucess = await GetDataCardsCourses(endpoint);
 
-
-
-
+//     DataCreateCourse.value = sucess;
+// }
 
 const router = useRouter()
 function RouterDedicated(item: any): void {
@@ -43,7 +46,7 @@ function RouterDedicated(item: any): void {
 </script>
 
 <template>
-    <div class="container_category_course" v-for="card in DataCreateCourse" :key="card.id">
+    <div class="container_category_course" v-for="card in props.DataCreateCourse" :key="card.id">
         <h1 class="title_category">{{ card.category }}</h1>
 
         <div class="container_cards_course">
