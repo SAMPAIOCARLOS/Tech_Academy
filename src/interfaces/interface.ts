@@ -26,3 +26,11 @@ export interface Route {
     component: any,
     meta?: { requiresAuth: boolean }
 }
+
+
+export interface NavigationSideBar {
+    id: number,
+    name: string,
+    icon: string,
+
+}

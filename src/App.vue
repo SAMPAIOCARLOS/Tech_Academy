@@ -9,7 +9,7 @@ const route = useRoute()
 
 <template>
 
-  <Home v-if="!['/Course', '/Blog', '/AboutUs', '/DedicatedCourse'].includes(route.path)"/>
+  <Home v-if="!['/Course', '/Blog', '/AboutUs', '/DedicatedCourse', '/login', '/register', '/StudentPortal'].includes(route.path)"/>
 
   <router-view v-else></router-view>
 

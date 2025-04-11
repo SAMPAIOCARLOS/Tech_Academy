@@ -23,6 +23,9 @@ function RouterNavigation(event: Event): void {
         case 'Sobre nós':
             router.push('/AboutUs');
             break;
+        case 'Login':
+            router.push('/login');
+            break;
         default:
             break;
     }
@@ -46,7 +49,7 @@ function RouterNavigation(event: Event): void {
         <li @click="RouterNavigation">Sobre nós</li>
     </ul>
 
-    <button id="buttonLogin">Login</button>
+    <button id="buttonLogin" @click="RouterNavigation">Login</button>
 </template>
 
 <style scoped>
