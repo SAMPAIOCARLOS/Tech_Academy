@@ -46,6 +46,8 @@ const DataCardsTechArea = ref<interfaces.CardTechArea[]>([
     /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
     padding: 5rem 0rem;
 }
 
@@ -71,11 +73,31 @@ const DataCardsTechArea = ref<interfaces.CardTechArea[]>([
 .titleCard {
     color: #313D5A;
     font-size: 2.7rem;
+    text-align: center;
 }
 
 .description {
     color: #0000008f;
     text-align: center;
     font-size: 1.5rem;
+}
+
+@media(max-width: 1250px) {
+    .CardsTechArea {
+        width: 45%;
+    }
+}
+@media(max-width: 900px) {
+    #containerCardsTechArea {
+        justify-content: center;
+    }
+    .CardsTechArea {
+        width: 75%;
+    }
+}
+@media(max-width: 500px) {
+    .CardsTechArea {
+        width: 100%;
+    }
 }
 </style>

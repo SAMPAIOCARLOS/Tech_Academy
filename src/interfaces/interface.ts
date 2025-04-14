@@ -14,6 +14,8 @@ export interface CardCourse {
 export interface dataCard {
     id_data: number,
     path_imgCourse: string,
+    path_imgCourseDedicated: string,
+    icon_imagCourse: string,
     titleCourse: string,
     descriptionCourse: string,
     textButton: string,

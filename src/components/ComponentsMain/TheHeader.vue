@@ -24,7 +24,7 @@ function RouterCourse(): void {
 header {
     width: 100vw;
     min-height: 60vh;
-    padding-top: 12vh;
+    padding-top: 20vh;
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
@@ -33,16 +33,16 @@ header {
     gap: 4rem;
     background-color: #313D5A;
     color: #ffffff;
-    
+    padding-bottom: 5rem;
 }
 
 #titleHeader {
-    font-size: 2.6vw;
+    font-size: 3rem;
 }
 
 #subtitleHeader {
     width: 40%;
-    font-size: 1.8vw;
+    font-size: 2rem;
     text-align: center;
     /* border: 1px solid red; */
 }
@@ -56,7 +56,7 @@ header {
     outline: none;
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.1vw;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -69,7 +69,38 @@ header {
 
 @media(max-height: 800px) {
     header {
-        padding-top: 6rem;
+        padding-top: 8.5rem;
+    }
+}
+
+@media(max-width: 1400px) {
+    #subtitleHeader {
+        width: 60%;
+    }
+}
+
+@media(max-width: 900px) {
+    #titleHeader {
+        width: 90%;
+        text-align: center;
+        font-size: 2.5rem;
+    }
+}
+
+@media(max-width: 600px) {
+    #subtitleHeader {
+        width: 80%;
+        font-size: 1.1rem;
+    }
+}
+
+@media(max-width: 400px) {
+    #titleHeader {
+        font-size: 2rem;
+    }
+    #subtitleHeader {
+        width: 90%;
+        /* font-size: 0.9rem; */
     }
 }
 </style>

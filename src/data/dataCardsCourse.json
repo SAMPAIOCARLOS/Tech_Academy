@@ -6,6 +6,8 @@
             {
                 "id_data": 1,
                 "path_imgCourse": "img_courseHTML.png",
+                "path_imgCourseDedicated": "img_courseHTML.png",
+                "icon_imagCourse": "img_iconHTML.png",
                 "titleCourse": "HTML E CSS ",
                 "descriptionCourse": "Aprenda a estruturar e estilizar páginas web.",
                 "textButton": "Saiba mais",
@@ -15,6 +17,8 @@
             {
                 "id_data": 2,
                 "path_imgCourse": "img_courseJS.png",
+                "path_imgCourseDedicated": "img_courseHTML.png",
+                "icon_imagCourse": "img_iconHTML.png",
                 "titleCourse": "JavaScript",
                 "descriptionCourse": "Curso de linguagem JavaScript, voltado para iniciantes.",
                 "textButton": "Saiba mais",
@@ -24,6 +28,8 @@
             {
                 "id_data": 3,
                 "path_imgCourse": "img_courseREACT.png",
+                "path_imgCourseDedicated": "img_courseHTML.png",
+                "icon_imagCourse": "img_iconHTML.png",
                 "titleCourse": "JavaScript",
                 "descriptionCourse": "Criação de aplicações web modernas e performáticas.",
                 "textButton": "Saiba mais",

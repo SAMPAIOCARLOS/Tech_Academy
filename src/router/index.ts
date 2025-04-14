@@ -11,9 +11,9 @@ import PageRegister from '../views/ComponentsRegister/PageRegister.vue';
 import StudentPortal from '../layout/Section_ StudentPortal/StudentPortal.vue';
 
 // Simulação de autenticação
-function isAuthenticated(): boolean {
-  return !!localStorage.getItem("token"); 
-}
+// function isAuthenticated(): boolean {
+//   return !!localStorage.getItem("token"); 
+// }
 
 const routes: Route[] = [
   { path: "/", component: Home },
@@ -33,12 +33,12 @@ const router = createRouter({
 });
 
 // Proteção de rotas
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !isAuthenticated()) {
-    next("/login"); 
-  } else {
-    next(); 
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth && !isAuthenticated()) {
+//     next("/login"); 
+//   } else {
+//     next(); 
+//   }
+// });
 
 export default router;

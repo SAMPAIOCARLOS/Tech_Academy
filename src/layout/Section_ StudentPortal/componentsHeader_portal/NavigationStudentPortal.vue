@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
 import * as interfaces from '../../../interfaces/interface';
 import { getImageUrl_icon } from '../../../utils/imageHelper';
 
-const props = defineProps({
+defineProps({
     Isvalue_TextSideBar: Boolean,
 })
 
-
+const emit = defineEmits(['selectItem'])
 
 const data_navigation = ref<interfaces.NavigationSideBar[]>([
     {
@@ -45,24 +45,29 @@ function RouterNavigation(event: Event): void {
     switch (nameItem_navigation) {
         case 'Home':
             console.log('Home');
+            emit('selectItem', nameItem_navigation)
 
             // PRECISO EMITIR UM EVENTO AQUI PARA CADA UM PARA NO COMPONENTE PRINCIPAL DO PORTAL DO USUÁRIO EXIBIR OS COMPONENTS CERTOS
             
             break;
         case 'Notificações':
             console.log('Notificações');
+            emit('selectItem', nameItem_navigation)
 
             break;
         case 'Meus Cursos':
             console.log('Meus Cursos');
+            emit('selectItem', nameItem_navigation)
 
             break;
         case 'Editar perfil':
             console.log('Editar perfil');
+            emit('selectItem', nameItem_navigation)
 
             break;
         case 'Sair':
             console.log('Sair');
+            emit('selectItem', nameItem_navigation)
 
             break;
         default:
@@ -82,7 +87,7 @@ function RouterNavigation(event: Event): void {
 
             <!-- Transição suave do texto -->
             <transition name="fade" appear>
-                <p v-if="Isvalue_TextSideBar">{{ item.name }}</p>
+                <p v-show="Isvalue_TextSideBar">{{ item.name }}</p>
             </transition>
         </li>
     </ul>

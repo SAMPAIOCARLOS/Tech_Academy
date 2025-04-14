@@ -125,4 +125,28 @@ function RouterNavigation(event: Event): void {
     border: 2px solid #F57E00;
     color: #F57E00;
 }
+
+@media(max-width: 1400px) {
+    #containerListNavigation {
+        width: 30%;
+    }
+}
+
+@media(max-width: 1100px) {
+    #containerListNavigation {
+        display: none;
+    }
+    #buttonLogin {
+        display: none;
+    }
+    #containerInputSearch {
+        width: 65%;
+    }
+}
+
+@media(max-width: 600px) {
+    #containerInputSearch {
+        display: none;
+    }
+}
 </style>

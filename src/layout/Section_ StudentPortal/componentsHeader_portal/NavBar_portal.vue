@@ -5,7 +5,7 @@ import SideBar_portal from './SideBar_portal.vue'
 import { getImageUrl_image } from '../../../utils/imageHelper';
 
 
-const emits = defineEmits(['openSideBar'])
+const emits = defineEmits(['openSideBar', 'selectItem'])
 
 
 
@@ -18,6 +18,11 @@ function openSideBar(event: Event): void {
 
     button.classList.toggle('active')
     showSideBar.value = !showSideBar.value
+}
+
+
+function selectItem(event: Event): void {
+    emits('selectItem', event)
 }
 </script>
 
@@ -36,7 +41,7 @@ function openSideBar(event: Event): void {
     </nav>
 
     <!-- Passando o valor da ref corretamente -->
-    <SideBar_portal :Isvalue_SideBar="showSideBar" />
+    <SideBar_portal :Isvalue_SideBar="showSideBar" @selectItem="selectItem($event)" />
 </template>
 
 

@@ -1,15 +1,68 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter()
 function RouterHome(path_router: string): void {
     router.push(path_router)
-
 }
+
+
+const UserDataLogin = ref({
+    email: '',
+    password: ''
+})
+
+async function formLogin(event: Event): Promise<void> {
+    event.preventDefault()
+    const endpoint = "http://localhost:8080/auth"
+
+
+    const result_loginUser = await LoginUser(endpoint);
+
+    if(result_loginUser) {
+        console.log("User logado com sucesso: ", result_loginUser);
+
+        saveDataUser(result_loginUser);
+    }
+}
+
+
+async function LoginUser(endpoint: string): Promise<any> {
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(UserDataLogin.value)
+        })
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.log("deu erro ao tentar logar o user: ", error);
+        
+    }
+}
+
+
+function saveDataUser(data: any): void {
+    const token = data.token;
+
+    localStorage.setItem('token', token);
+
+    console.log("token: ", token);
+    
+}
+
 </script>
 
 <template>
-    <form @submit="event => event.preventDefault()">
+    <form @submit="formLogin">
         <h1 id="titleForm">Login</h1>
 
         <aside class="asideForm">
@@ -17,7 +70,7 @@ function RouterHome(path_router: string): void {
                 <div id="containerIcon_input">
                     <img src="../../assets/images/icones/icone_user.png" alt="">
                 </div>
-                <input type="text" id="inputEmail" placeholder="Email*">
+                <input type="text" id="inputEmail" placeholder="Email*" v-model="UserDataLogin.email">
             </div>
             <div class="containerCaseError">
                 <img src="../../assets/images/icones/icone_alert.png" alt="">
@@ -30,7 +83,7 @@ function RouterHome(path_router: string): void {
                 <div id="containerIcon_input">
                     <img src="../../assets/images/icones/icone_user.png" alt="">
                 </div>
-                <input type="text" id="inputEmail" placeholder="Senha*">
+                <input type="text" id="inputEmail" placeholder="Senha*" v-model="UserDataLogin.password">
             </div>
             <div class="containerCaseError">
                 <img src="../../assets/images/icones/icone_alert.png" alt="">
@@ -43,7 +96,7 @@ function RouterHome(path_router: string): void {
             <p>Lembrar-me</p>
         </div>
 
-        <button id="buttonLogin" @click="RouterHome('/StudentPortal')">Entrar</button>
+        <button id="buttonLogin">Entrar</button>
 
         <div id="containerForgotPassword">
             <p @click="RouterHome('/register')">Cadastre-se</p>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, defineEmits } from 'vue'
 
 import NavigationStudentPortal from './NavigationStudentPortal.vue'
 
@@ -18,14 +18,22 @@ watch(() => props.Isvalue_SideBar,
     }
   }
 )
+
+
+const emit = defineEmits(['selectItem'])
+
+
+function selectItem(event: Event): void {
+    emit('selectItem', event)
+}
 </script>
 
 <template>
-    <div id="contentSideBar" ref="SideBar">
-        <div id="containerContentSideBar">
-            <NavigationStudentPortal :Isvalue_TextSideBar="Isvalue_SideBar"/>
-        </div>
+  <div id="contentSideBar" ref="SideBar">
+    <div id="containerContentSideBar">
+      <NavigationStudentPortal :Isvalue_TextSideBar="Isvalue_SideBar" @selectItem="selectItem($event)" />
     </div>
+  </div>
 </template>
 
 

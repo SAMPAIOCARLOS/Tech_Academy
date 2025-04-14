@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, defineProps, onMounted } from 'vue';
 import { getImageUrl_image } from '../../utils/imageHelper';
 import * as interfaces from '../../interfaces/interface'
-import { GetDataCardsCourses } from '../../Services/requests';
+// import { GetDataCardsCourses } from '../../Services/requests';
 import { useRouter } from 'vue-router'
 
 
@@ -14,21 +14,8 @@ const props = defineProps({
     }
 })
 
-
-// onMounted((): void => {
-//     recoverDataCourse();
-// })
-
-// const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
-
-// async function recoverDataCourse(): Promise<void> {
-//     const endpoint = "src/data/dataCardsCourse.json";
-//     const sucess = await GetDataCardsCourses(endpoint);
-
-//     DataCreateCourse.value = sucess;
-// }
-
 const router = useRouter()
+
 function RouterDedicated(item: any): void {
     router.push({
         path: "/DedicatedCourse",
@@ -43,10 +30,19 @@ function RouterDedicated(item: any): void {
     });
 }
 
+const showCursos = ref(true);
+
+onMounted(():void => {
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+        showCursos.value = false;
+    }
+})
 </script>
 
 <template>
-    <div class="container_category_course" v-for="card in props.DataCreateCourse" :key="card.id">
+    <div class="container_category_course" v-for="card in props.DataCreateCourse" :key="card.id" v-if="showCursos">
         <h1 class="title_category">{{ card.category }}</h1>
 
         <div class="container_cards_course">
@@ -88,7 +84,7 @@ function RouterDedicated(item: any): void {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
-    /* border: 2px solid rgb(72, 255, 0); */
+    border: 2px solid rgb(72, 255, 0);
     flex-wrap: wrap;
 }
 

@@ -34,6 +34,7 @@
     /* border: 5px solid green; */
     display: flex;
     justify-content: center;
+    padding-bottom: 4rem;
 }
 #contentComments {
     width: 85%;
@@ -45,6 +46,7 @@
 #titleComments {
     color: #000000;
     font-size: 3rem;
+    text-align: center;
 }
 
 #containerListComments {
@@ -53,6 +55,7 @@
     display: flex;
     justify-content: space-around;
     gap: 3rem;
+    flex-wrap: wrap;
 }
 
 .Boxcomments {
@@ -71,5 +74,14 @@
     color: #6699CC;
     text-align: center;
     font-weight: bold;
+}
+
+@media(max-width: 750px) {
+    #titleComments {
+        font-size: 2rem;
+    }
+    .Boxcomments {
+        width: 100%;
+    }
 }
 </style>
