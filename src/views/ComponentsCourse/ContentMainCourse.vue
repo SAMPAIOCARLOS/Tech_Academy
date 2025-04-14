@@ -1,43 +1,46 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import CourseCards from './CourseCards.vue';
-import { GetDataCardsCourses } from '../../Services/requests';
+import { GetDataCursos } from '../../Services/requests';
 import * as interfaces from '../../interfaces/interface';
 
-const DataCreateCourse = ref<interfaces.CardCourse[]>([]);
-const allCourses = ref<interfaces.CardCourse[]>([]); // Guarda os dados originais
 
-onMounted(async (): Promise<void> => {
-    await recoverDataCourse();
-});
+const allCourses = ref<interfaces.Course[]>([]);
+const DataCreateCourse = ref<interfaces.Course[]>([]);
+
+
 
 async function recoverDataCourse(): Promise<void> {
-    const endpoint = "src/data/dataCardsCourse.json";
-    const success = await GetDataCardsCourses(endpoint);
+    const endpoint = "http://localhost:8080/courses/all";
+    const cursos: interfaces.Course[] = await GetDataCursos(endpoint);
 
-    if (success) {
-        DataCreateCourse.value = success;
-        allCourses.value = success; // Salva uma cópia original dos dados
+    if (cursos.length > 0) {
+        allCourses.value = cursos;
+        DataCreateCourse.value = cursos;
     }
 }
 
-function teste(event: Event): void {
+function handleFilterChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
 
     if (selectedValue === "Todos") {
         DataCreateCourse.value = allCourses.value;
     } else {
-        DataCreateCourse.value = allCourses.value.filter((item) => item.category === selectedValue);
+        DataCreateCourse.value = allCourses.value.filter(course => course.description === selectedValue);
     }
 }
+
+onMounted(async () => {
+    await recoverDataCourse();
+});
 </script>
 
 
 <template>
     <div id="ContainerCourse">
         <div id="containerFilterCards">
-            <select name="SelectFilter" id="SelectFilter" @change="teste">
+            <select name="SelectFilter" id="SelectFilter" @change="handleFilterChange">
                 <option selected disabled>Selecione uma categoria</option>
                 <option value="Todos">Todos</option>
                 <option value="Programação Web">Programação web</option>

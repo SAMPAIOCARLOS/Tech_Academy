@@ -9,17 +9,15 @@ export interface CardTechArea {
 export interface CardCourse {
     id: number,
     category: string,
-    DataCards: dataCard[]
+    DataCards: Course[]
 }
-export interface dataCard {
-    id_data: number,
-    path_imgCourse: string,
-    path_imgCourseDedicated: string,
-    icon_imagCourse: string,
-    titleCourse: string,
-    descriptionCourse: string,
-    textButton: string,
-    timeCourse: string,
+export interface Course {
+    id: number;
+    title: string;
+    description: string;
+    timeCourse: string;
+    category: string;
+    pathImageCourse: string;
 }
 
 

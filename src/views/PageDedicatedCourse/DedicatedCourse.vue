@@ -24,6 +24,9 @@ const courseData = computed(() => ({
             <p>{{ courseData.description }}</p>
             <p>Duração: {{ courseData.time }}</p>
             <button>{{ courseData.textButton }}</button>
+
+
+            <h1>o id é {{ courseData.id }}</h1>
         </div>
     </div>
 </template>

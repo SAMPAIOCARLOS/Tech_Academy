@@ -1,14 +1,21 @@
-export async function GetDataCardsCourses(endpoint: string): Promise<any> {
+export async function GetDataCursos(endpoint: string): Promise<any> {
     try {
-        const response = await fetch(endpoint);
-        const data = await response.json();
+        const res = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
 
-        if (!response.ok) throw new Error(data.message);
-            
+        if (!res.ok) throw new Error('Erro ao buscar cursos');
+
+        const data = await res.json();
         return data;
 
     } catch (error) {
-        console.log("error getDataCardsCourses", error);
+        console.error("Erro ao buscar cursos:", error);
+        return [];
     }
 }
 

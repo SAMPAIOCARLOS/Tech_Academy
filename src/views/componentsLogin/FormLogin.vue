@@ -50,8 +50,14 @@ const closeModal = (): void => {
 }
 const saveDataUser = (data: any): void => {
     const token = data.token;
+    const dataUser = data.userDto;
+    const id_user = dataUser.id;
+
+    localStorage.setItem('id_user', id_user);
     localStorage.setItem('token', token);
+    
     console.log("token: ", token);   
+    console.log("data user: ", data);
 }
 
 const Router = (path_router: string): void => {
