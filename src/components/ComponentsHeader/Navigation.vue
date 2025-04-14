@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { getImageUrl_icon } from '../../utils/imageHelper';
 import { useRouter } from 'vue-router'
 
@@ -26,11 +27,23 @@ function RouterNavigation(event: Event): void {
         case 'Login':
             router.push('/login');
             break;
+        case 'Acesse o portal':
+            router.push('/StudentPortal');
+            break;
         default:
             break;
     }
 
 }
+
+const showNameUser = ref(false);
+onMounted((): void => {
+    const token = localStorage.getItem('token')
+    
+    if (token) {
+        showNameUser.value = true
+    }
+})
 
 </script>
 
@@ -49,7 +62,9 @@ function RouterNavigation(event: Event): void {
         <li @click="RouterNavigation">Sobre nós</li>
     </ul>
 
-    <button id="buttonLogin" @click="RouterNavigation">Login</button>
+    <button class="buttonNavigation" @click="RouterNavigation" v-if="!showNameUser">Login</button>
+
+    <button class="buttonNavigation" @click="RouterNavigation" v-else>Acesse o portal</button>
 </template>
 
 <style scoped>
@@ -106,12 +121,12 @@ function RouterNavigation(event: Event): void {
     border-bottom: 3px solid #F57E00;
 }
 
-#buttonLogin {
+.buttonNavigation {
     background-color: #F57E00;
-    width: 8rem;
+    min-width: 8rem;
     padding: 13px;
     border-radius: 10px;
-    border: none;
+    border: 2px solid transparent;
     outline: none;
     color: #ffffff;
     font-weight: bold;
@@ -119,12 +134,13 @@ function RouterNavigation(event: Event): void {
     cursor: pointer;
     transition: all 0.3s;
 }
-
-#buttonLogin:hover {
+.buttonNavigation:hover {
     background-color: #ffffff;
     border: 2px solid #F57E00;
     color: #F57E00;
 }
+
+
 
 @media(max-width: 1400px) {
     #containerListNavigation {

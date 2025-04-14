@@ -105,4 +105,14 @@ form {
     font-size: 2rem;
     color: #000000;
 }
+
+@media(max-width: 600px) {
+    .inputs {
+        width: 100%;
+    }
+    .textarea {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
 </style>

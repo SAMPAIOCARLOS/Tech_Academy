@@ -67,7 +67,11 @@ function RouterNavigation(event: Event): void {
             break;
         case 'Sair':
             console.log('Sair');
-            emit('selectItem', nameItem_navigation)
+            localStorage.clear();
+            setInterval(() => {
+                location.reload();
+            },300);
+            // emit('selectItem', nameItem_navigation)
 
             break;
         default:

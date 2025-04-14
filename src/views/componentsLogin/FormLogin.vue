@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { LoginUser } from '../../Services/requests';
+import Modal from '../../layout/Modal.vue';
+import ModalError from '../../layout/ModalError.vue';
+
 const router = useRouter()
 function RouterHome(path_router: string): void {
     router.push(path_router)
@@ -13,64 +17,66 @@ const UserDataLogin = ref({
     password: ''
 })
 
+const showModal = ref(false);
+const showModalError = ref(false);
 async function formLogin(event: Event): Promise<void> {
     event.preventDefault()
     const endpoint = "http://localhost:8080/auth"
+    
 
-
-    const result_loginUser = await LoginUser(endpoint);
-
+    const result_loginUser = await LoginUser(endpoint, UserDataLogin.value);
     if(result_loginUser) {
         console.log("User logado com sucesso: ", result_loginUser);
-
         saveDataUser(result_loginUser);
+        showModal.value = true;
+        showModalError.value = false;
+    } else {
+        showModal.value = false;
+        showModalError.value = true;
     }
 }
 
 
-async function LoginUser(endpoint: string): Promise<any> {
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(UserDataLogin.value)
-        })
+const closeModal = (): void => {
+    showModal.value = false;
+    showModalError.value = false;
 
-        if (!response.ok) throw new Error(response.statusText);
+    UserDataLogin.value.email = '';
+    UserDataLogin.value.password = '';
 
-        const data = await response.json();
-        return data;
+    Router('/StudentPortal')
 
-    } catch (error) {
-        console.log("deu erro ao tentar logar o user: ", error);
-        
-    }
+
 }
-
-
-function saveDataUser(data: any): void {
+const saveDataUser = (data: any): void => {
     const token = data.token;
-
     localStorage.setItem('token', token);
-
-    console.log("token: ", token);
-    
+    console.log("token: ", token);   
 }
+
+const Router = (path_router: string): void => {
+    router.push(path_router)
+
+}
+
 
 </script>
 
 <template>
+
+    <Modal v-if="showModal" :titleCard="'Usuário logado com sucesso'" @closeModal="closeModal" />
+    <ModalError v-if="showModalError" :titleCard="'Usuário ou senha incorretos'" @closeModal="closeModal" />
+
+
     <form @submit="formLogin">
         <h1 id="titleForm">Login</h1>
 
         <aside class="asideForm">
             <div class="coverInput">
-                <div id="containerIcon_input">
+                <div class="containerIcon_input">
                     <img src="../../assets/images/icones/icone_user.png" alt="">
                 </div>
-                <input type="text" id="inputEmail" placeholder="Email*" v-model="UserDataLogin.email">
+                <input type="email" class="inputs" placeholder="Email*" v-model="UserDataLogin.email" required>
             </div>
             <div class="containerCaseError">
                 <img src="../../assets/images/icones/icone_alert.png" alt="">
@@ -80,10 +86,10 @@ function saveDataUser(data: any): void {
 
         <aside class="asideForm">
             <div class="coverInput">
-                <div id="containerIcon_input">
+                <div class="containerIcon_input">
                     <img src="../../assets/images/icones/icone_user.png" alt="">
                 </div>
-                <input type="text" id="inputEmail" placeholder="Senha*" v-model="UserDataLogin.password">
+                <input type="password" class="inputs" placeholder="Senha*" v-model="UserDataLogin.password" required>
             </div>
             <div class="containerCaseError">
                 <img src="../../assets/images/icones/icone_alert.png" alt="">
@@ -103,7 +109,7 @@ function saveDataUser(data: any): void {
             <div id="lineEnd"></div>
             <p href="">Esqueci minha senha</p>
         </div>
-        
+
     </form>
 </template>
 
@@ -111,12 +117,13 @@ function saveDataUser(data: any): void {
 form {
     background-color: #ffffff;
     width: 30%;
-    height: 55vh;
+    min-height: 55vh;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    padding-bottom: 20px;
 }
 #titleForm {
     text-align: center;
@@ -135,10 +142,12 @@ form {
     background-color: #A7C0D9;
     border-radius: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-right: 10px;
 }
 
-#containerIcon_input {
+.containerIcon_input {
     width: 18%;
     min-width: 5rem;
     height: 100%;
@@ -150,13 +159,17 @@ form {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-#inputEmail {
+.inputs {
     width: 80%;
     background-color: transparent;
     border: none;
     outline: none;
     font-size: 1.7rem;
     color: #ffffff;
+}
+
+.inputNull {
+    border: 3px solid rgb(255, 32, 32);
 }
 
 .containerCaseError {
@@ -185,7 +198,7 @@ form {
     outline: none;
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: 1.4rem;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -208,5 +221,21 @@ form {
     width: 2px;
     height: 100%;
     background-color: #0074F8;
+}
+
+@media(max-width: 1250px) {
+    form {
+        width: 50%;
+    }
+}
+@media(max-width: 750px) {
+    form {
+        width: 70%;
+    }
+}
+@media(max-width: 500px) {
+    form {
+        width: 90%;
+    }
 }
 </style>

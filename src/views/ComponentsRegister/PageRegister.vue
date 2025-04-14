@@ -46,6 +46,7 @@ nav {
     position: fixed;
     background-color: #ffffff;
     z-index: 200;
+    position: fixed;
 }
 
 #containerNavBar {
@@ -58,12 +59,15 @@ nav {
 
 #containerFormRegister {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #313D5A;
     padding-top: 12vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    
 }
 
 #buttonReturnLogin {
@@ -76,7 +80,7 @@ nav {
 
 @media(max-height: 800px) {
     #containerFormRegister {
-        padding-top: 6rem;
+        padding-top: 10rem;
     }
 }
 </style>

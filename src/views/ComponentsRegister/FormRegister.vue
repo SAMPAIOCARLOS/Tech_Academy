@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { registerUser } from '../../Services/requests';
 
 import Modal from '../../layout/Modal.vue';
+import ModalError from '../../layout/ModalError.vue';
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const UserDataFull = ref({
     name: '',
@@ -13,35 +18,17 @@ const UserDataFull = ref({
 });
 
 
-const UserData = ref({
+const UserData = computed(() => ({
     name: UserDataFull.value.name,
     email: UserDataFull.value.email,
     birth: UserDataFull.value.birth,
     password: UserDataFull.value.password
-})
+}));
 
-async function registerUser(endpoint: string, userData?: any): Promise<any> {
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
 
-        if (!response.ok) throw new Error(response.statusText)
-
-        const data = await response.json();
-        return data;
-        
-    } catch (error) {
-        console.log("deu erro ao tentar registrar o user: ", error);
-        
-    }
-}
 
 const showModal = ref(false);
+const showModalError = ref(false);
 async function register_form(event: Event): Promise<void> {
     event.preventDefault();
     const endpoint = 'http://localhost:8080/user';
@@ -53,97 +40,100 @@ async function register_form(event: Event): Promise<void> {
     if (result_register) {
         console.log("User registrado com sucesso: ", result_register);
         showModal.value = true;
+        showModalError.value = false;
+    } else {
+        showModal.value = false;
+        showModalError.value = true;
     }
 }
 
+const closeModal = (): void => {
+    showModal.value = false;
+    showModalError.value = false;
 
+    Router('/login')
+}
+
+function Router(path_router: string): void {
+    router.push(path_router)
+
+}
 
 </script>
 
 <template>
+    <Modal v-if="showModal" :titleCard="'Cadastro realizado com sucesso'" @closeModal="closeModal" />
+    <ModalError v-if="showModalError" :titleCard="'Erro ao realizar cadastro'" @closeModal="closeModal" />
+
+
     <form @submit="register_form">
         <h1 id="titleForm">Cadastro</h1>
 
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+        <section class="sectionForm">
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="text" class="inputs" placeholder="Nome completo*" v-model="UserDataFull.name" required>
                 </div>
-                <input type="text" class="inputs" placeholder="Nome completo*" v-model="UserDataFull.name">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
 
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+            </aside>
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="email" class="inputs" placeholder="Email*" v-model="UserDataFull.email" required>
                 </div>
-                <input type="text" class="inputs" placeholder="Email*" v-model="UserDataFull.email">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
+            </aside>
+        </section>
 
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+        <section class="sectionForm">
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="email" class="inputs" placeholder="Confirmar Email*" v-model="UserDataFull.confirmEmail"
+                        required>
                 </div>
-                <input type="text" class="inputs" placeholder="Confirmar Email*" v-model="UserDataFull.confirmEmail">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
 
-
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+            </aside>
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="date" class="inputs inputDate" placeholder="data de nascimento"
+                        v-model="UserDataFull.birth" required>
                 </div>
-                <input type="date" class="inputs" placeholder="data de nascimento" v-model="UserDataFull.birth">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
+
+            </aside>
+        </section>
 
 
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+        <section class="sectionForm">
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="password" class="inputs" placeholder="Senha*" v-model="UserDataFull.password" required>
                 </div>
-                <input type="text" class="inputs" placeholder="Senha*" v-model="UserDataFull.password">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
 
-
-        <aside class="asideForm">
-            <div class="coverInput">
-                <div id="containerIcon_input">
-                    <img src="../../assets/images/icones/icone_user.png" alt="">
+            </aside>
+            <aside class="asideForm">
+                <div class="coverInput">
+                    <div class="containerIcon_input">
+                        <img src="../../assets/images/icones/icone_user.png" alt="">
+                    </div>
+                    <input type="text" class="inputs" placeholder="Confirmar Senha*"
+                        v-model="UserDataFull.confirmPassword" required>
                 </div>
-                <input type="text" class="inputs" placeholder="Confirmar Senha*" v-model="UserDataFull.confirmPassword">
-            </div>
-            <div class="containerCaseError">
-                <img src="../../assets/images/icones/icone_alert.png" alt="">
-                <p>Deu merda ai mn qual foi</p>
-            </div>
-        </aside>
+
+            </aside>
+        </section>
 
 
 
@@ -153,13 +143,13 @@ async function register_form(event: Event): Promise<void> {
     </form>
 
 
-    <Modal v-if="showModal" @closeModal="showModal = false"/>
+
 </template>
 
 <style scoped>
 form {
     background-color: #ffffff;
-    width: 30%;
+    width: 60%;
     min-height: 55vh;
     border-radius: 15px;
     display: flex;
@@ -174,9 +164,16 @@ form {
     text-align: center;
     padding: 20px;
 }
+.sectionForm {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
 .asideForm {
-    width: 80%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -189,9 +186,10 @@ form {
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
-#containerIcon_input {
+.containerIcon_input {
     width: 18%;
     min-width: 5rem;
     height: 100%;
@@ -212,28 +210,49 @@ form {
     font-size: 1.7rem;
     color: #ffffff;
 }
+/* .inputDate {
+    font-size: 1rem;
+} */
 
-.containerCaseError {
-    display: none;
-    align-items: center;
-    gap: 5px;
-    color: rgb(255, 32, 32);
-    font-weight: bold;
-}
 
 #buttonRegister {
     background-color: #F57E00;
-    width: 80%;
+    width: 40%;
     padding: 13px;
     border-radius: 10px;
     border: none;
     outline: none;
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: 1.7rem;
     cursor: pointer;
     transition: all 0.3s;
 }
 
+@media(max-width: 1300px) {
+    .sectionForm {
+        justify-content: center;
+    }
+    .asideForm {
+        width: 80%;
+    }
+}
 
+@media(max-width: 800px) {
+    form {
+        width: 80%;
+    }
+    .asideForm {
+        width: 100%;
+    }
+    #buttonRegister {
+        width: 60%;
+    }
+}
+
+@media(max-width: 500px) {
+    form {
+        width: 95%;
+    }
+}
 </style>

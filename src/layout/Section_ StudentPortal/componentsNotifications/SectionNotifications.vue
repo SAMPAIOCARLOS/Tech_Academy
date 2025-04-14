@@ -86,4 +86,37 @@
     font-size: 1.4rem;
     cursor: pointer;
 }
+
+@media(max-width: 1300px) {
+    #cardsNotifications {
+        width: 40%;
+    }
+}
+@media(max-width: 1000px) {
+    #cardsNotifications {
+        width: 50%;
+    }
+}
+@media(max-width: 750px) {
+    #cardsNotifications {
+        width: 70%;
+    }
+    #titleNotifications {
+        font-size: 1.3rem;
+    }
+}
+@media(max-width: 600px) {
+    #containerCardsNotifications {
+        justify-content: center;
+    }
+    #cardsNotifications {
+        width: 80%;
+    }
+}
+
+@media(max-width: 500px) {
+    #cardsNotifications {
+        width: 100%;
+    }
+}
 </style>

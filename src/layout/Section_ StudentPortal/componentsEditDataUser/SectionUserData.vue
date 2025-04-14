@@ -51,4 +51,20 @@ import FormUserData from './FormUserData.vue';
     height: 80%;
     object-fit: contain;
 }
+
+@media(max-width: 700px) {
+    #titleUserData {
+        font-size: 1.5rem;
+    }
+    #containerIcon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media(max-width: 550px) {
+    #titleUserData {
+        font-size: 1rem;
+    }
+}
 </style>

@@ -42,7 +42,7 @@ function selectItem(event: Event): void {
     position: fixed;
     top: 0;
     left: 0;
-    width: 5%;
+    width: 5.5rem;
     height: 100vh;
     /* background: rgb(122, 122, 122); */
     background-color: #4A5A80;
@@ -54,6 +54,7 @@ function selectItem(event: Event): void {
 
 #contentSideBar.active {
     width: 25%;
+    left: 0;
 }
 
 #containerContentSideBar {
@@ -61,5 +62,35 @@ function selectItem(event: Event): void {
     padding-top: 7rem;
 }
 
+@media(max-width: 1000px) {
+  #contentSideBar.active {
+      width: 35%;
+    }
+}
+@media(max-width: 750px) {
+  #contentSideBar.active {
+    width: 50%;
+  }
+}
+
+@media(max-width: 600px) {
+  #contentSideBar.active {
+    width: 60%;
+  }
+
+  #contentSideBar {
+    left: -100%;
+  }
+}
+@media(max-width: 500px) {
+  #contentSideBar.active {
+    width: 70%;
+  }
+}
+@media(max-width: 400px) {
+  #contentSideBar.active {
+    width: 100%;
+  }
+}
 
 </style>

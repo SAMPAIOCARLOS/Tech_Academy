@@ -9,9 +9,9 @@ import SectionUserData from './componentsEditDataUser/SectionUserData.vue';
 
 
 const containerMain_studentPortal = ref<HTMLElement | null>(null)
-function Reajuste_contentMain(): void {
-    containerMain_studentPortal.value?.classList.toggle('SideBarActive')
-}
+// function Reajuste_contentMain(): void {
+//     containerMain_studentPortal.value?.classList.toggle('SideBarActive')
+// }
 const sectionActive = ref('Home')
 
 function alterSection(event: string): void {
@@ -47,7 +47,7 @@ function alterSection(event: string): void {
 </script>
 
 <template>
-    <NavBar_portal @openSideBar="Reajuste_contentMain" @selectItem="alterSection($event)" />
+    <NavBar_portal @selectItem="alterSection($event)" />
 
     <div id="containerMain_studentPortal" ref="containerMain_studentPortal">
         <div id="containerTitLeSection">
@@ -62,20 +62,26 @@ function alterSection(event: string): void {
 <style scoped>
 #containerMain_studentPortal{
     width: 90%;
-    height: 100vh;
-    margin-left: 8%;
+    min-height: 100vh;
+    margin-left:7rem;
     background-color: rgb(255, 255, 255);
     padding-top: 12vh;
     color: #000000;
+    border: 3px solid red;
 }
 
-#containerMain_studentPortal.SideBarActive {
-    width: 70%;
-    height: 100vh;
-    margin-left: 30%;
-}
 
 #containerTitLeSection {
     /* border: 2px solid red; */
 }
+
+
+
+@media(max-width: 600px) {
+    #containerMain_studentPortal {
+        width: 90%;
+        margin: auto;
+    }
+}
+
 </style>

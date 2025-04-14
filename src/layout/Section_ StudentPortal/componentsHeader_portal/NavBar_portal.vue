@@ -14,8 +14,6 @@ const showSideBar = ref(false)
 function openSideBar(event: Event): void {
     const button = event.currentTarget as HTMLDivElement
 
-    emits('openSideBar')
-
     button.classList.toggle('active')
     showSideBar.value = !showSideBar.value
 }
