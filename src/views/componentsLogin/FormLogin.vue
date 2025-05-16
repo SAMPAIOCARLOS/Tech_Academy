@@ -55,6 +55,7 @@ const saveDataUser = (data: any): void => {
 
     localStorage.setItem('id_user', id_user);
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(dataUser));
     
     console.log("token: ", token);   
     console.log("data user: ", data);

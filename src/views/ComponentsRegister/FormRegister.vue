@@ -34,7 +34,7 @@ async function register_form(event: Event): Promise<void> {
     const endpoint = 'http://localhost:8080/user';
 
     console.log(UserData.value);
-    
+
 
     const result_register = await registerUser(endpoint, UserData.value);
     if (result_register) {
@@ -95,8 +95,8 @@ function Router(path_router: string): void {
                     <div class="containerIcon_input">
                         <img src="../../assets/images/icones/icone_user.png" alt="">
                     </div>
-                    <input type="email" class="inputs" placeholder="Confirmar Email*" v-model="UserDataFull.confirmEmail"
-                        required>
+                    <input type="email" class="inputs" placeholder="Confirmar Email*"
+                        v-model="UserDataFull.confirmEmail" required>
                 </div>
 
             </aside>
@@ -128,7 +128,7 @@ function Router(path_router: string): void {
                     <div class="containerIcon_input">
                         <img src="../../assets/images/icones/icone_user.png" alt="">
                     </div>
-                    <input type="text" class="inputs" placeholder="Confirmar Senha*"
+                    <input type="password" class="inputs" placeholder="Confirmar Senha*"
                         v-model="UserDataFull.confirmPassword" required>
                 </div>
 

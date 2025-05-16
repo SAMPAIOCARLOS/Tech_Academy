@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, watch } from 'vue';
 import { getImageUrl_image } from '../../utils/imageHelper';
 import * as interfaces from '../../interfaces/interface'
 // import { GetDataCardsCourses } from '../../Services/requests';
 import { useRouter } from 'vue-router'
 
+import PageNoCourse from './PageNoCourse.vue'
 
 const props = defineProps({
     DataCreateCourse: {
@@ -20,34 +21,62 @@ function RouterDedicated(item: any): void {
         path: "/DedicatedCourse",
         query: {
             id: item.id,
-            title: item.pathImageCourse,
-            description: item.title,
-            image: item.timeCourse,
-            time: item.category
+            title: item.title,
+            description: item.description,
+            image: item.pathImageCourse,
+            time: item.timeCourse
         }
     });
 }
+
+
+watch(() => props.DataCreateCourse, (newVal) => {
+    console.log("DataCreateCourse atualizado:", newVal);
+}, { immediate: true, deep: true });
+
+let isEmpty = true;
+
+if(props.DataCreateCourse.length === 0) {
+    if (isEmpty) isEmpty = false;
+}
+
+
+// function isAuthenticated(): boolean {
+//     return !!localStorage.getItem("token");
+// }
 
 
 </script>
 
 <template>
 
-    <div v-for="item in props.DataCreateCourse" :key="item.id" class="cardCourse">
-        <div class="containerTime">
-            <p class="button_time">{{ item.category }}</p>
-        </div>
-        <div class="containerimgCourse">
-            <img :src="getImageUrl_image(item.timeCourse)" alt="">
-        </div>
 
-        <h1 class="titleCard">{{ item.pathImageCourse }}</h1>
-        <p class="descriptionCard">{{ item.title }}</p>
 
-        <button class="buttonLearnMore" @click="RouterDedicated(item)">Saiba mais</button>
+    <!-- Se houver dados, mostra os cards -->
+    <div v-if="props.DataCreateCourse.length > 0" class="cardsContainer">
+        <div v-for="item in props.DataCreateCourse" :key="item.id" class="cardCourse">
+            <div class="containerTime">
+                <p class="button_time">{{ item.timeCourse }}</p>
+            </div>
+            <div class="containerimgCourse">
+                <img :src="getImageUrl_image(item.pathImageCourse)" alt="" />
+            </div>
+
+            <h1 class="titleCard">{{ item.title }}</h1>
+            <p class="descriptionCard">{{ item.description }}</p>
+
+            <button class="buttonLearnMore" @click="RouterDedicated(item)">
+                Saiba mais
+            </button>
+        </div>
     </div>
 
+    <!-- Se não houver dados, mostra a mensagem -->
+    <PageNoCourse v-else />
+
+
 </template>
+
 
 <style scoped>
 
@@ -124,4 +153,29 @@ function RouterDedicated(item: any): void {
     transform: translateY(-70%);
 }
 
-</style>
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 30px 20px;
+    
+}
+
+@media(max-width: 1400px) {
+    .cardCourse {
+        width: 45%;
+    }
+}
+
+@media(max-width: 950px) {
+    .cardCourse {
+        width: 80%;
+    }
+}
+@media(max-width: 550px) {
+    .cardCourse {
+        width: 100%;
+    }
+}
+</style> 

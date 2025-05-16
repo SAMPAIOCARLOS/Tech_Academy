@@ -67,7 +67,7 @@ function alterSection(event: string): void {
     background-color: rgb(255, 255, 255);
     padding-top: 12vh;
     color: #000000;
-    border: 3px solid red;
+    /* border: 3px solid red; */
 }
 
 

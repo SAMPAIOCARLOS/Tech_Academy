@@ -27,7 +27,7 @@ function handleFilterChange(event: Event): void {
     if (selectedValue === "Todos") {
         DataCreateCourse.value = allCourses.value;
     } else {
-        DataCreateCourse.value = allCourses.value.filter(course => course.description === selectedValue);
+        DataCreateCourse.value = allCourses.value.filter(course => course.category === selectedValue);
     }
 }
 
@@ -59,7 +59,7 @@ onMounted(async () => {
 #ContainerCourse {
     /* border: 2px solid blue; */
     width: 100vw;
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -93,5 +93,12 @@ onMounted(async () => {
     gap: 3rem;
     flex-wrap: wrap;
     padding-bottom: 7rem;
+}
+
+@media(max-width: 950px) {
+    #containerCards {
+        /* border: 1px solid red; */
+        justify-content: center;
+    }
 }
 </style>

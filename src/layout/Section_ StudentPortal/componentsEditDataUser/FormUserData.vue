@@ -1,8 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
+const dataUser = ref({
+    name: 'd',
+    email: 'd',
+    birthDate: '',
+});
 
-const textArea = ref("Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+const textArea = ref("Lorem Ipsum is simply dummy text of the printing and typesetting industry...");
+
+onMounted((): void => {
+    const token = localStorage.getItem('token');
+
+    // Pega os dados do localStorage
+    const userFromStorage = JSON.parse(localStorage.getItem('user') as string);
+
+    // Verifica se veio algo antes de tentar usar
+    if (userFromStorage) {
+        dataUser.value.name = userFromStorage.name;
+        dataUser.value.email = userFromStorage.email;
+
+        // Se a data de nascimento veio, formatamos para YYYY-MM-DD
+        const rawDate = userFromStorage.birthDate;
+        if (rawDate) {
+            // Se a data estiver no formato DD-MM-YYYY, converta para YYYY-MM-DD
+            const dateParts = rawDate.split('-');
+            if (dateParts.length === 3) {
+                dataUser.value.birthDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+            }
+        }
+    }
+
+    console.log(token, userFromStorage);
+});
 </script>
 
 <template>
@@ -10,15 +40,16 @@ const textArea = ref("Lorem Ipsum is simply dummy text of the printing and types
         <div class="containerInputs">
             <aside class="asides">
                 <label for="nome" class="labels">Nome</label>
-                <input type="text" id="nome" placeholder="Ex. Sthefane Silva" class="inputs">
+                <input type="text" id="nome" placeholder="Ex. Sthefane Silva" class="inputs" v-model="dataUser.name">
             </aside>
             <aside class="asides">
                 <label for="email" class="labels">Email</label>
-                <input type="text" id="email" placeholder="Ex. SthefaneSilva@gmail.com" class="inputs">
+                <input type="text" id="email" placeholder="Ex. SthefaneSilva@gmail.com" class="inputs"
+                    v-model="dataUser.email">
             </aside>
             <aside class="asides">
                 <label for="dateBirth" class="labels">Data de nascimento</label>
-                <input type="date" id="dateBirth" class="inputs">
+                <input type="date" id="dateBirth" class="inputs" v-model="dataUser.birthDate">
             </aside>
         </div>
 

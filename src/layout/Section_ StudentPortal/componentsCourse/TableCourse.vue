@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-
+import { getImageUrl_icon } from '../../../utils/imageHelper';
 
 interface Course {
     id: number;
@@ -23,7 +23,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <table id="containerTable" v-for="item in props.DataCreateCourse" :key="item.id">
+    <table id="containerTable">
         <thead>
             <tr>
                 <th>Conteudo</th>
@@ -34,9 +34,12 @@ const props = defineProps({
 
         </thead>
 
-        <tbody>
+        <tbody v-for="item in props.DataCreateCourse" :key="item.id">
             <tr>
-                <td>{{ item.title }}</td>
+                <td class="item_one">
+                    <img :src="getImageUrl_icon('icone_courses.png')" alt="icone">
+                    {{ item.title }}
+                </td>
                 <td>Curso</td>
                 <td>{{ item.progress }} %</td>
                 <td>17, mar. 2025</td>
@@ -119,5 +122,12 @@ const props = defineProps({
         text-transform: uppercase;
         font-size: 0.75rem;
     }
+}
+
+.item_one {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* border: 1px solid red; */
 }
 </style>

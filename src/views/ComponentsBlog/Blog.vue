@@ -63,7 +63,7 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
 }
 
 #buttonNews {
-    width: 17%;
+    width: 14rem;
     background-color: #6699CC;
     color: #ffffff;
     font-size: 1.5rem;
@@ -85,7 +85,7 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
 }
 
 #buttonLearnMore {
-    width: 20%;
+    width: 14rem;
     background-color: #F57E00;
     color: #ffffff;
     font-size: 1.5rem;
@@ -104,6 +104,25 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
 @media(max-height: 800px) {
     #containerBlog {
         padding-top: 6rem;
+    }
+}
+
+@media(max-width: 1255px) {
+    #containerInfor_headerBlog {
+        width: 90%;
+    }
+    #titleHeaderBlog {
+        font-size: 3rem;
+    }
+}
+
+@media(max-width: 850px) {
+    #titleHeaderBlog {
+        font-size: 2.5rem;
+    }
+
+    #containerHeaderBlog {
+        min-height: 60vh;
     }
 }
 </style>

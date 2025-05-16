@@ -158,6 +158,9 @@ onMounted((): void => {
     #containerInputSearch {
         width: 65%;
     }
+    .buttonNavigation {
+        display: none;
+    }
 }
 
 @media(max-width: 600px) {

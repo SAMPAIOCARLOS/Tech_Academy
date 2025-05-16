@@ -52,7 +52,7 @@ function handleFilterChange(event: Event): void {
     if (selectedValue === 'Todos') {
         DataValueCourse.value = allUserCourses.value;
     } else {
-        DataValueCourse.value = allUserCourses.value.filter(course => course.description === selectedValue);
+        DataValueCourse.value = allUserCourses.value.filter(course => course.category === selectedValue);
     }
 }
 </script>
@@ -114,5 +114,16 @@ function handleFilterChange(event: Event): void {
 }
 #SelectFilter:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.123);
+}
+
+@media(max-width: 900px) {
+    #SelectFilter {
+        width: 50%;
+    }
+}
+@media(max-width: 600px) {
+    #SelectFilter {
+        width: 70%;
+    }
 }
 </style>

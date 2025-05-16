@@ -3,6 +3,11 @@ import { getImageUrl_image } from '../../utils/imageHelper';
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
+import NavBar from '../../components/ComponentsHeader/NavBar.vue';
+import HeaderPageDedicatedCourse from './HeaderPageDedicatedCourse.vue';
+import ContentMainPageCourse from './ContentMainPageCourse.vue';
+import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
+
 const route = useRoute();
 
 const courseData = computed(() => ({
@@ -17,24 +22,14 @@ const courseData = computed(() => ({
 </script>
 
 <template>
-    <div>
-        <div class="dedicated-course">
-            <h1>{{ courseData.title }}</h1>
-            <img :src="getImageUrl_image(courseData.image)" :alt="courseData.title" />
-            <p>{{ courseData.description }}</p>
-            <p>Duração: {{ courseData.time }}</p>
-            <button>{{ courseData.textButton }}</button>
+    <NavBar />
+    <HeaderPageDedicatedCourse :id="courseData.id" :title="courseData.title" :description="courseData.description"
+        :imageCourse="courseData.image" />
+    <ContentMainPageCourse />
+    <TheFooter />
 
-
-            <h1>o id é {{ courseData.id }}</h1>
-        </div>
-    </div>
 </template>
 
 <style scoped>
-div {
-    width: 100%;
-    height: 100vh;
-    background-color: blue;
-}
+
 </style>

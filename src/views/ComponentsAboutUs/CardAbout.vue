@@ -14,7 +14,7 @@
         </aside>
     </section>
 
-    <section class="cardInformation" style="background-color: #A7C0D9;">
+    <section class="cardInformation cardInformationTwo" style="background-color: #A7C0D9;">
         <aside id="second_containerImage_cardInformation">
             <img src="../../assets/images/imagens/image_abouttwo.png" alt="">
         </aside>
@@ -42,6 +42,11 @@
     padding: 2rem;
     border-radius: 15px;
     color: #ffffff;
+    flex-wrap: wrap;
+}
+
+.cardInformationTwo {
+    flex-wrap: wrap-reverse;
 }
 
 #first_containerTextContent_cardInformation {
@@ -114,5 +119,66 @@
     color: #000000;
     text-align: center;
     font-size: 2rem;
+}
+
+@media(max-width: 1000px) {
+    .cardInformation {
+        gap: 3rem;
+        justify-content: center;
+    }
+    #first_containerTextContent_cardInformation {
+        width: 100%;
+        align-items: center;
+    }
+    #first_containerTextContent_cardInformation > p {
+        text-align: center;
+    }
+    #first_containerImage_cardInformation {
+        width: 80%;
+    }
+
+
+    #second_containerTextContent_cardInformation {
+        width: 100%;
+        align-items: center;
+    }
+    #second_containerTextContent_cardInformation > p {
+        text-align: center;
+    }
+
+    #second_containerImage_cardInformation {
+        width: 80%;
+    }
+    #textContent_footerAbout {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-width: 600px) {
+    #first_containerImage_cardInformation {
+        width: 100%;
+    }
+    #first_containerTextContent_cardInformation > p {
+        font-size: 1.3rem;
+    }
+    #second_containerImage_cardInformation {
+        width: 100%;
+    }
+    #second_containerTextContent_cardInformation>p {
+        font-size: 1.3rem;
+    }
+    
+}
+
+@media(max-width: 500px) {
+    #first_containerTextContent_cardInformation> h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    #second_containerTextContent_cardInformation > h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
 }
 </style>

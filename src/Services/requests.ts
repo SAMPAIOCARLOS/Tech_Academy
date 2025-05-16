@@ -4,7 +4,7 @@ export async function GetDataCursos(endpoint: string): Promise<any> {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                // 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
 

@@ -30,7 +30,7 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
 #haeaderAbout {
     width: 100vw;
     min-height: 60vh;
-    padding-top: 12vh;
+    padding-top: 18vh;
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
@@ -39,6 +39,7 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
     gap: 4rem;
     background-color: #313D5A;
     color: #ffffff;
+    padding-bottom: 5rem;
 }
 
 #titleAbout {
@@ -61,5 +62,18 @@ import TheFooter from '../../components/ComponentsMain/TheFooter.vue';
     align-items: center;
     gap: 3rem;
     padding: 3rem 0;
+}
+
+@media(max-width: 1200px) {
+    #descriptionHeaderAbout {
+        width: 70%;
+    }
+}
+
+@media(max-width: 850px) {
+    #descriptionHeaderAbout {
+        width: 90%;
+        font-size: 1.5rem;
+    }
 }
 </style>

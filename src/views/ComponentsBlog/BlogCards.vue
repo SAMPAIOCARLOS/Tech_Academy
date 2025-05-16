@@ -56,6 +56,7 @@
     /* border: 2px solid red; */
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -152,17 +153,21 @@
     display: flex;
     justify-content: space-between;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 .cardsNews {
     width: 40%;
+    min-width: 15rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     /* background-color: rgb(255, 255, 255); */
     border-radius: 10px;
+    /* border: 4px solid rgb(25, 0, 255); */
 }
 .contaiiner_imgNewsBeta {
     width: 100%;
+    min-width: 15rem;
     height: 13rem;
     background-color: #313D5A;
     background: url("../../assets/images/imagens/person-working-html-computer 1.png") no-repeat center center;
@@ -178,5 +183,49 @@
 
 #cardsNews2 {
     transform: translateY(15%);
+}
+
+@media(max-width: 1350px) {
+    #boxCardsnewsBeta {
+        justify-content: center;
+    }
+    .cardsNews {
+        width: 80%;
+    }
+}
+
+@media(max-width: 1150px) {
+    #containerCardAlpha {
+        width: 80%;
+    }
+    #containerCardBeta {
+        width: 100%;
+    }
+    #boxCardsnewsBeta {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .cardsNews {
+        width: 40%;
+    }
+    #cardsNews2 {
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 850px) {
+    #containerCardAlpha {
+        width: 100%;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 650px) {
+    .cardsNews {
+        width: 90%;
+    }
+    #boxCardsnewsBeta {
+        justify-content: center;
+    }
 }
 </style>
